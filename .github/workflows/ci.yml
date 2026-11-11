@@ -19,7 +19,7 @@ jobs:
         lua: ["5.3", "5.4"]
     steps:
       - uses: actions/checkout@v4
-      - uses: leafo/gh-actions-lua@v10
+      - uses: leafo/gh-actions-lua@v13
         with:
           luaVersion: ${{ matrix.lua }}
       - name: Spec suite
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leafo/gh-actions-lua@v10
+      - uses: leafo/gh-actions-lua@v13
         with:
           luaVersion: "5.4"
       - uses: leafo/gh-actions-luarocks@v4
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leafo/gh-actions-lua@v10
+      - uses: leafo/gh-actions-lua@v13
         with:
           luaVersion: "5.4"
       - name: Bundled UI kit makes no external requests
