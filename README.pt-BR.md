@@ -96,12 +96,12 @@ O `loglens watch` lê o que o arquivo já contém e depois o acompanha. O cabeç
 
 ![Uma gravação animada do loglens watch: o painel se enche conforme as requisições chegam e os achados aparecem](docs/screenshots/watch.svg)
 
-*Quadros reais do `loglens watch examples/access.log`, do início ao fim do exemplo (para regenerar: `lua tools/make_recording.lua`). A imagem principal no topo é o último quadro.*
+*Quadros reais do `loglens watch examples/access.log`, do início ao fim do exemplo (para regenerar: `lua tools/make_recording.lua`). A imagem principal no topo é o último quadro, e com movimento reduzido ativado a gravação mostra apenas esse quadro.*
 
 <details>
 <summary>Um quadro da mesma execução, mais ou menos um terço adiante</summary>
 
-![O painel 35 por cento adiante no log: 1.080 requisições, três achados até agora](docs/screenshots/live-early.png)
+![O painel cerca de um terço adiante no log: 1.080 requisições, três achados até agora](docs/screenshots/live-early.png)
 
 </details>
 
@@ -151,7 +151,7 @@ Códigos de saída: `0` ok, `1` falha (entrada ilegível ou nenhuma linha pôde 
 
 ```console
 $ lua bin/loglens html examples/access.log -o report.html
-loglens: wrote report.html (253.1 KiB)
+loglens: wrote report.html (253.3 KiB)
 ```
 
 Um arquivo só, sem servidor, sem rede. Abre direto de `file://` e é organizado como um aplicativo: uma barra lateral com um destino por seção (visão geral, tráfego, conteúdo, clientes, segurança, dados) que acompanha a rolagem, trilha de navegação, uma alternância Gráficos / Tabelas (cada gráfico também tem a sua própria visão em tabela), paleta de comandos (`Ctrl+K`), temas escuro e claro e uma barra de status. No celular a barra lateral vai para o pé da tela. Selecione um achado para ver as evidências e as limitações.

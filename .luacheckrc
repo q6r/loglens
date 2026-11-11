@@ -7,5 +7,6 @@ codes = true
 -- The bundled UI kit and the report view (src/loglens/assets) are JavaScript and CSS, not Lua.
 exclude_files = { "src/loglens/assets/**" }
 
--- `_` marks values that are deliberately unused.
-ignore = { "212/_.*", "213/_.*" }
+-- `_` marks values that are deliberately unused, and a method that implements an interface (the fakes
+-- in spec/) often has no use for `self`.
+ignore = { "212/_.*", "213/_.*", "212/self" }

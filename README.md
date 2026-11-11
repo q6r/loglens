@@ -96,12 +96,12 @@ Colour is used when the output is a terminal; `--color always`, `--no-color`, `N
 
 ![An animated recording of loglens watch: the dashboard fills as requests arrive and findings appear](docs/screenshots/watch.svg)
 
-*Real frames of `loglens watch examples/access.log` from start to end of the sample (regenerate with `lua tools/make_recording.lua`). The hero image at the top is the last frame.*
+*Real frames of `loglens watch examples/access.log` from start to end of the sample (regenerate with `lua tools/make_recording.lua`). The hero image at the top is the last frame, and with reduced motion enabled the recording shows only that frame.*
 
 <details>
 <summary>A still from the same run, about a third of the way through</summary>
 
-![The dashboard 35 percent into the log: 1,080 requests, three findings so far](docs/screenshots/live-early.png)
+![The dashboard about a third of the way through the log: 1,080 requests, three findings so far](docs/screenshots/live-early.png)
 
 </details>
 
@@ -151,7 +151,7 @@ Exit status: `0` ok, `1` failure (unreadable input, or no line could be parsed),
 
 ```console
 $ lua bin/loglens html examples/access.log -o report.html
-loglens: wrote report.html (253.1 KiB)
+loglens: wrote report.html (253.3 KiB)
 ```
 
 One file, no server, no network. It opens from `file://` and is laid out like an app: a rail with one destination per section (overview, traffic, content, clients, security, data) that follows your scroll, breadcrumbs, a Charts / Tables switch (every chart also has its own table view), a command palette (`Ctrl+K`), dark and light themes and a status bar. On a phone the rail moves to the bottom of the screen. Select a finding to see its evidence and limitations.

@@ -618,11 +618,11 @@ local function empty_state(ctx, summary, live, out)
 end
 
 -- Lets sections that can list fewer rows (the findings) give up rows until the frame fits, but
--- keep at least `floor` of them. Returns the new total height.
-local function shrink_sections(sections, total, max_lines, floor)
+-- keep at least `keep` of them. Returns the new total height.
+local function shrink_sections(sections, total, max_lines, keep)
   for _, section in ipairs(sections) do
     if section.shrink and total > max_lines then
-      local lines = section.shrink(#section.lines - (total - max_lines), floor)
+      local lines = section.shrink(#section.lines - (total - max_lines), keep)
       total, section.lines = total - #section.lines + #lines, lines
     end
   end
@@ -767,10 +767,10 @@ function M.render(summary, opts)
   local list = add(95, function(out)
     findings(ctx, summary, out)
   end)
-  -- The rows the findings need for `budget` lines, listing at least `floor` of them.
-  list.shrink = function(budget, floor)
-    floor = min(floor, #summary.findings)
-    for limit = #summary.findings - 1, floor, -1 do
+  -- The rows the findings need for `budget` lines, listing at least `keep` of them.
+  list.shrink = function(budget, keep)
+    keep = min(keep, #summary.findings)
+    for limit = #summary.findings - 1, keep, -1 do
       local lines = {}
       findings(ctx, summary, lines, limit)
       if #lines <= budget then
@@ -778,7 +778,7 @@ function M.render(summary, opts)
       end
     end
     local lines = {}
-    findings(ctx, summary, lines, floor)
+    findings(ctx, summary, lines, keep)
     return lines
   end
   add(100, function(out)

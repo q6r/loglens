@@ -137,7 +137,8 @@ local function regular_event(rng, ts, clients, total_weight, with_timing)
   local client = bot and { ip = bot[1], ua = bot[2] } or pick_client(rng, clients, total_weight)
   bot = bot and true or false
   local kind = rng:weighted({ { "static", 40 }, { "page", 36 }, { "api", 15 }, { "search", 5 }, { "post", 4 } })
-  local method, target, missing = "GET", nil, false
+  local method, missing = "GET", false
+  local target
   if bot then
     kind = "page"
   end

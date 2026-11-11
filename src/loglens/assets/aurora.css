@@ -293,7 +293,7 @@ html.a-scrolled .a-chrome::before { box-shadow: 0 1px 0 var(--line); }
 .a-tab[aria-selected="true"] .a-tab__count { background: color-mix(in oklab, var(--on-primary) 16%, transparent); }
 
 /* pills and pill tabs (the project tabs of the layout) */
-.a-pill { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--fill); color: var(--ink-2); font: 500 12px/1 var(--font-sans); white-space: nowrap; text-decoration: none; transition: background-color var(--dur-1), color var(--dur-1); }
+.a-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border: 1px solid var(--line); border-radius: 11px; background: var(--fill); color: var(--ink-2); font: 500 12px/1 var(--font-sans); white-space: nowrap; text-decoration: none; transition: background-color var(--dur-1), color var(--dur-1); }
 button.a-pill, a.a-pill { cursor: pointer; }
 button.a-pill:hover, a.a-pill:hover { background: var(--fill-strong); color: var(--ink-1); }
 .a-pill__count { display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--fill-strong); color: var(--ink-1); font-size: 11px; }

@@ -86,7 +86,7 @@ $ SOURCE_DATE_EPOCH=1794830400 lua bin/loglens json examples/access.log --compac
 
 ```console
 $ lua bin/loglens html examples/access.log -o report.html
-loglens: wrote report.html (253.1 KiB)
+loglens: wrote report.html (253.3 KiB)
 ```
 
 **A gate for CI or cron.** Findings of severity high or above fail the job, the report is still printed:

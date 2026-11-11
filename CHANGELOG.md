@@ -13,7 +13,9 @@ All notable changes to this project are documented here. The format follows
   section that follows the scroll, breadcrumbs, a Charts / Tables switch for every chart, context pills
   (period, requests, bytes sent, format) and a status bar. The page itself is now built by
   `report.js`; the HTML document holds only the no-script fallback, the data and the scripts.
-- Screenshots and the README banner were regenerated for the new look.
+- Screenshots, the terminal stills, the animated terminal recording (`tools/make_recording.lua`, now in the
+  same near-black palette and static under reduced motion) and the README banner were regenerated for the
+  new look.
 
 ## [0.1.0] - 2026-11-10
 
