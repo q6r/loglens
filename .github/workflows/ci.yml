@@ -48,7 +48,7 @@ jobs:
           luarocks install luacheck
           luacheck src spec tools bin/loglens
       - name: stylua (advisory until the code base has been formatted once with `stylua .`)
-        uses: JohnnyMorganz/stylua-action@v4
+        uses: JohnnyMorganz/stylua-action@v5
         continue-on-error: true
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
