@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lua ${{ matrix.lua }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        lua: ["5.3", "5.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: ${{ matrix.lua }}
+      - name: Spec suite
+        run: lua spec/run.lua
+      - name: Smoke test the CLI
+        run: |
+          lua bin/loglens version
+          lua bin/loglens report examples/access.log --no-color --width 100 > "$RUNNER_TEMP/report.txt"
+          grep -q "FINDINGS" "$RUNNER_TEMP/report.txt"
+          lua bin/loglens json examples/access.log --compact > "$RUNNER_TEMP/summary.json"
+          lua bin/loglens html examples/access.log -o "$RUNNER_TEMP/report.html"
+          test -s "$RUNNER_TEMP/report.html"
+          lua bin/loglens watch examples/access.log --frames 2 --interval 0.2 > "$RUNNER_TEMP/watch.txt"
+          lua bin/loglens report examples/access.log --fail-on high > /dev/null || test $? -eq 3
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: "5.4"
+      - uses: leafo/gh-actions-luarocks@v4
+      - name: luacheck
+        run: |
+          luarocks install luacheck
+          luacheck src spec tools bin/loglens
+      - name: stylua (advisory until the code base has been formatted once with `stylua .`)
+        uses: JohnnyMorganz/stylua-action@v4
+        continue-on-error: true
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
+
+  report-assets:
+    name: HTML report assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: "5.4"
+      - name: Bundled UI kit makes no external requests
+        run: |
+          if grep -rEo "https?://[^\"' )]+" src/loglens/assets | grep -v "www.w3.org/2000/svg"; then
+            echo "an asset mentions an external URL" >&2
+            exit 1
+          fi
+      - name: The committed examples are up to date
+        run: |
+          lua tools/gen_examples.lua > /dev/null
+          git diff --exit-code -- examples

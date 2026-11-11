@@ -1,0 +1,26 @@
+# Generic build and tooling output
+dist/
+coverage/
+obj/
+.venv/
+node_modules/
+
+# LuaRocks and local trees
+lua_modules/
+.luarocks/
+*.rock
+*.src.rock
+
+# Real logs never belong in the repository (the generated samples under examples/ do)
+*.log
+!examples/*.log
+
+# bin/ holds the CLI entry point (bin/loglens) and is tracked on purpose, so it is not ignored here
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db

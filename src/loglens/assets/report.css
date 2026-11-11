@@ -1,0 +1,74 @@
+/* loglens report layout. The bundled Aurora UI kit provides the shell and the components; this file only
+   arranges them (custom properties of the kit only, no colours of its own). */
+
+/* the log: a long name truncates instead of breaking the layout */
+.r-head { display: grid; gap: 6px; }
+.r-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* key figures: the hero tile and four tiles in one row, two columns on narrower screens */
+.r-kpis { margin-top: 2px; }
+.r-kpi-hero { grid-column: span 4; }
+.r-kpi { grid-column: span 2; }
+.r-kpi-hero .a-stat, .r-kpi .a-stat { height: 100%; }
+/* the hero tile keeps its sparkline in the corner, so the row is no taller than it needs to be */
+.r-kpi-hero .a-stat { position: relative; }
+.r-kpi-hero .a-stat__row { position: absolute; top: 14px; right: 16px; margin: 0; padding: 0; }
+@media (max-width: 1280px) {
+  .r-kpi-hero { grid-column: span 12; }
+  .r-kpi { grid-column: span 3; }
+}
+@media (max-width: 900px) {
+  .r-kpi { grid-column: span 6; }
+}
+@media (max-width: 340px) {
+  .r-kpi { grid-column: span 12; }
+}
+
+/* sections */
+.r-section { display: grid; gap: 14px; margin-top: 34px; }
+.r-heading { display: grid; gap: 4px; }
+.r-lead, .r-hint { max-width: 82ch; margin: 0; color: var(--ink-2); font-size: 13px; }
+.r-hint { color: var(--ink-3); font-size: 12px; }
+.r-nowrap { white-space: nowrap; }
+
+/* cards that share a row have the same height; a stack of cards keeps each card's own height */
+.r-section .a-grid > div > .a-card { height: 100%; }
+.r-stack { display: flex; flex-direction: column; gap: clamp(12px, 1.4vw, 16px); }
+.r-section .a-grid > .r-stack > .a-card { height: auto; }
+.r-stack > .a-card:last-child { flex: 1 1 auto; }
+
+.r-status { display: grid; gap: 18px; }
+
+/* the findings table keeps severity and title on a phone; matches and clients are in the drawer */
+@media (max-width: 640px) {
+  .r-findings .a-table th:nth-child(n+3), .r-findings .a-table td:nth-child(n+3) { display: none; }
+}
+
+/* a finding in the drawer */
+.r-block { display: grid; gap: 8px; }
+.r-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.r-list { display: grid; gap: 8px; margin: 0; padding-left: 1.15em; color: var(--ink-2); }
+
+/* the context pills keep their labels (an icon alone says nothing) and scroll if they do not fit;
+   below a tablet the page head says the same, so they go */
+.a-subbar__end { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.a-subbar__end::-webkit-scrollbar { display: none; }
+.a-subbar__end .a-pill__label { display: inline; }
+@media (max-width: 900px) {
+  .a-subbar__end { display: none; }
+}
+
+/* printing: cards stay in one piece and the page action is left out */
+@media print {
+  .a-card { break-inside: avoid; }
+  .a-pagehead__actions { display: none; }
+}
+
+/* without JavaScript the page is the plain-text dashboard */
+.r-plain {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font: 12px/1.4 var(--font-mono);
+  color: var(--ink-2);
+}
